@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="he">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>הטבלה המחזורית ויסודות</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <header>
+        <h1>הטבלה המחזורית ויסודות</h1>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="index.html">דף הבית</a></li>
+            <li><a href="module1.html">חומר ומצבי צבירה</a></li>
+            <li><a href="module2.html">שינויי מצב צבירה</a></li>
+            <li><a href="module3.html">צפיפות ומסה</a></li>
+            <li><a href="module4.html">מבנה האטום</a></li>
+            <li><a href="module5.html">הטבלה המחזורית</a></li>
+            <li><a href="module6.html">מולקולת המים</a></li>
+            <li><a href="module7.html">תגובות כימיות</a></li>
+            <li><a href="module8.html">קצב תגובות וקטליזטורים</a></li>
+            <li><a href="module9.html">חומצות ובסיסים</a></li>
+        </ul>
+    </nav>
+    <div class="container">
+        <h2>היכרות עם הטבלה המחזורית</h2>
+        <p>הטבלה המחזורית היא אוסף מאורגן של כל היסודות הידועים. כל תא בטבלה מייצג יסוד ומכיל
+            את סמל היסוד, שמו והמספר האטומי שלו. מספר זה הוא מספר הפרוטונים בגרעין האטום.
+            באטום ניטרלי המספר האטומי הוא גם מספר האלקטרונים. היסודות בטבלה מסודרים כך
+            שניתן לראות דפוסים במחזוריות התכונות: כל שורה אופקית נקראת <strong>תקופה</strong> וכל טור אנכי
+            נקרא <strong>קבוצה</strong>. בחלקו הימני העליון נמצאים גזים אצילים, בצד שמאל מתכות אלקליות ועוד.</p>
+        <p>יסוד הוא חומר שכל האטומים שלו מכילים את אותו מספר פרוטונים. ישנם יסודות רבים,
+            וכימאים משתמשים בטבלה המחזורית כמו אלפבית כדי להרכיב מולקולות וחומרים שונים. איזוטופים
+            הם אטומים של אותו יסוד בעלי מספר שווה של פרוטונים אך מספר שונה של נויטרונים.</p>
+        <h2>פעילות מומלצת</h2>
+        <p>להיכרות עם הטבלה המחזורית, ניתן ליצור משחק "קלפי יסודות": מדפיסים כרטיסים שעליהם שם
+            היסוד, הסמל שלו והמספר האטומי. התלמידים מתאימים בין שם, סמל ומספר ומגלים את המיקום
+            בטבלה. אפשר גם לבקר בטבלה אינטראקטיבית כמו באתר <a href="https://ptable.com" target="_blank">ptable.com</a>
+            כדי לראות מידע נוסף ולהבין כיצד התכונות משתנות לאורך הקבוצות והתקופות.</p>
+        <h2>מבחן קצר</h2>
+        <form id="quiz-module5" class="quiz">
+            <p>1. מה מציין המספר האטומי של יסוד?</p>
+            <label><input type="radio" name="q1" value="a"> מסת האטום</label>
+            <label><input type="radio" name="q1" value="b"> מספר הנויטרונים</label>
+            <label><input type="radio" name="q1" value="c"> כמות האלקטרונים בלבד</label>
+            <label><input type="radio" name="q1" value="d"> מספר הפרוטונים בגרעין</label>
+
+            <p>2. כיצד נקראת השורה האופקית בטבלה המחזורית?</p>
+            <label><input type="radio" name="q2" value="a"> קבוצה</label>
+            <label><input type="radio" name="q2" value="b"> תקופה</label>
+            <label><input type="radio" name="q2" value="c"> פרופיל</label>
+            <label><input type="radio" name="q2" value="d"> איזוטופ</label>
+
+            <p>3. מהו איזוטופ?</p>
+            <label><input type="radio" name="q3" value="a"> אטום שבו מספר הפרוטונים שונה ממספר הנויטרונים</label>
+            <label><input type="radio" name="q3" value="b"> אטום אחר לחלוטין</label>
+            <label><input type="radio" name="q3" value="c"> אטום עם מספר פרוטונים זהה אך מספר נויטרונים שונה</label>
+            <label><input type="radio" name="q3" value="d"> מכשיר במעבדה</label>
+
+            <button type="button" onclick="checkQuiz('module5')">בדוק תשובות</button>
+            <div id="result-module5"></div>
+        </form>
+</div>
+    <footer>
+        <p>סיום מודול 5</p>
+    <p class="teacher-link"><a href="teacher-notes.html">הערות למורה</a></p>
+</footer>
+</body>
+</html>

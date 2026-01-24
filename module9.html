@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="he">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>חומצות, בסיסים ו‑pH</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <header>
+        <h1>חומצות, בסיסים ו‑pH</h1>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="index.html">דף הבית</a></li>
+            <li><a href="module1.html">חומר ומצבי צבירה</a></li>
+            <li><a href="module2.html">שינויי מצב צבירה</a></li>
+            <li><a href="module3.html">צפיפות ומסה</a></li>
+            <li><a href="module4.html">מבנה האטום</a></li>
+            <li><a href="module5.html">הטבלה המחזורית</a></li>
+            <li><a href="module6.html">מולקולת המים</a></li>
+            <li><a href="module7.html">תגובות כימיות</a></li>
+            <li><a href="module8.html">קצב תגובות וקטליזטורים</a></li>
+            <li><a href="module9.html">חומצות ובסיסים</a></li>
+        </ul>
+    </nav>
+    <div class="container">
+        <h2>מהו pH?</h2>
+        <p>המושגים חומצה ובסיס מתארים את ריכוז יוני המימן (H<sup>+</sup>) בתמיסה. סולם ה‑pH מודד את
+            מידת החומציות או הבסיסיות של חומר ונע בין 0 ל‑14. ערך 7 הוא ניטרלי; ערכים נמוכים
+            מ‑7 מציינים חומצות וערכים גבוהים מ‑7 מציינים בסיסים. מים טהורים הם ניטרליים
+            pH=7. כל יחידה בסולם מייצגת שינוי של פי 10 בריכוז יוני המימן – כלומר חומצה pH 4
+            היא עשרה פעמים חומצית יותר מחומצה pH 5.</p>
+        <h2>מהן חומצה ובסיס?</h2>
+        <p>חומצה היא חומר הממסר יוני מימן (H<sup>+</sup>) כאשר הוא נמס במים; טעמן בדרך כלל חמוץ. בסיס
+            הוא חומר המקבל יוני מימן או מוסר יוני הידרוקסיד (OH<sup>−</sup>). כאשר מערבבים חומצה ובסיס
+            בכמויות מתאימות, הם מנטרלים זה את זה ונוצרים מים ומלח. לדוגמה, חומץ
+            (חומצה אצטית) וסודה לשתייה (בסיס) מגיבים ליצירת נתרן אצטט, מים וגז פחמן דו‑חמצני.</p>
+        <h2>אינדיקטור טבעי: כרוב סגול</h2>
+        <p>ניתן להכין אינדיקטור טבעי מכרוב סגול: קוצצים את העלים ומשרים במים חמים לקבלת נוזל
+            סגול. מחלקים את הנוזל לכוסות ומוסיפים לכל כוס חומר אחר: חומץ, מיץ לימון, סודה לשתייה,
+            סבון, וכדומה. צבע הנוזל משתנה בהתאם לחומציות: כחול‑ירוק בבסיסים ואדום בחומצות. זה
+            מאפשר למדוד pH בצורה ביתית. חשוב להשתמש בכלים נקיים ולהיעזר במבוגר.</p>
+        <h2>מבחן קצר</h2>
+        <form id="quiz-module9" class="quiz">
+            <p>1. מהו מאפיין של חומצה במים?</p>
+            <label><input type="radio" name="q1" value="a"> חומצה מוסרת יוני מימן (H<sup>+</sup>) בתמיסה</label>
+            <label><input type="radio" name="q1" value="b"> חומצה הופכת את המים לקפואים</label>
+            <label><input type="radio" name="q1" value="c"> חומצה מעלה את pH מעל 7</label>
+            <label><input type="radio" name="q1" value="d"> חומצה מוסיפה מלח לתמיסה</label>
+
+            <p>2. מהו pH ניטרלי?</p>
+            <label><input type="radio" name="q2" value="a"> 0</label>
+            <label><input type="radio" name="q2" value="b"> 5</label>
+            <label><input type="radio" name="q2" value="c"> 7</label>
+            <label><input type="radio" name="q2" value="d"> 14</label>
+
+            <p>3. מה קורה כאשר מערבבים חומצה ובסיס בכמויות מתאימות?</p>
+            <label><input type="radio" name="q3" value="a"> נוצרים מים ומלח בתהליך שנקרא ניטרול</label>
+            <label><input type="radio" name="q3" value="b"> לא קורה דבר</label>
+            <label><input type="radio" name="q3" value="c"> נוצרת חומצה חזקה יותר</label>
+            <label><input type="radio" name="q3" value="d"> נוצר גז מימן בלבד</label>
+
+            <button type="button" onclick="checkQuiz('module9')">בדוק תשובות</button>
+            <div id="result-module9"></div>
+        </form>
+</div>
+    <footer>
+        <p>סיום מודול 9</p>
+    <p class="teacher-link"><a href="teacher-notes.html">הערות למורה</a></p>
+</footer>
+</body>
+</html>
