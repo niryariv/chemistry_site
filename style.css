@@ -124,6 +124,35 @@ h3{
   border-color: rgba(255,152,0,.25);
 }
 
+.concept-grid{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+  margin: 16px 0 24px;
+}
+
+.concept-card{
+  padding: 16px;
+  border-radius: var(--radius);
+  background: rgba(63,81,181,.06);
+  border: 1px solid rgba(63,81,181,.14);
+  box-shadow: 0 8px 18px rgba(20,40,90,.08);
+}
+
+.concept-card h3{
+  margin-top: 0;
+}
+
+.concept-highlight{
+  font-weight: 700;
+  color: var(--muted);
+  margin-bottom: 0;
+}
+
+.concept-card img{
+  margin: 10px 0 0;
+}
+
 img{
   max-width:100%;
   height:auto;
