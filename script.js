@@ -85,4 +85,55 @@ function checkQuiz(moduleId) {
     }
     const resultDiv = document.getElementById('result-' + moduleId);
     resultDiv.textContent = `תוצאה: ${score} מתוך ${total}`;
+
+    const reflectionArea = quizForm.querySelector('.reflection-area');
+    const reflectionInput = quizForm.querySelector('.reflection-input');
+    const submitButton = quizForm.querySelector('button');
+    if (score < total) {
+        if (reflectionArea) {
+            reflectionArea.hidden = false;
+        }
+        quizForm.dataset.needsReflection = 'true';
+        const hasText = reflectionInput && reflectionInput.value.trim().length > 0;
+        if (submitButton) {
+            submitButton.disabled = !hasText;
+        }
+    } else {
+        if (reflectionArea) {
+            reflectionArea.hidden = true;
+        }
+        quizForm.dataset.needsReflection = 'false';
+        if (submitButton) {
+            submitButton.disabled = false;
+        }
+    }
 }
+
+document.addEventListener('DOMContentLoaded', () => {
+    const reflectionInputs = document.querySelectorAll('.reflection-input');
+    reflectionInputs.forEach((input) => {
+        const moduleId = input.dataset.module;
+        if (!moduleId) {
+            return;
+        }
+        const storageKey = `reflection-${moduleId}`;
+        const storedValue = localStorage.getItem(storageKey);
+        if (storedValue) {
+            input.value = storedValue;
+        }
+        input.addEventListener('input', () => {
+            const trimmedValue = input.value.trim();
+            localStorage.setItem(storageKey, trimmedValue);
+            const form = input.closest('form');
+            if (!form) {
+                return;
+            }
+            if (form.dataset.needsReflection === 'true') {
+                const button = form.querySelector('button');
+                if (button) {
+                    button.disabled = trimmedValue.length === 0;
+                }
+            }
+        });
+    });
+});
