@@ -188,7 +188,7 @@ function checkQuiz(moduleId) {
     if (remainingAttempts === 0) {
         resultDiv.textContent = `תוצאה: ${score} מתוך ${total}. הגעת למספר הניסיונות המקסימלי. ניתן לנסות שוב בעוד ${formatCooldownTime(COOLDOWN_MS)}.`;
     } else {
-        resultDiv.textContent = `תוצאה: ${score} מתוך ${total}`;
+        resultDiv.textContent = `תוצאה: ${score} מתוך ${total}. ניסיונות שנותרו: ${remainingAttempts}.`;
     }
     updateQuizUI(moduleId);
 }
