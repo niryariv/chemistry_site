@@ -67,9 +67,106 @@ const quizAnswers = {
     }
 };
 
+const MAX_ATTEMPTS = 3;
+const COOLDOWN_MS = 5 * 60 * 1000;
+
+function getAttemptStorageKey(moduleId) {
+    return `quizAttempts:${moduleId}`;
+}
+
+function loadAttemptData(moduleId) {
+    const raw = localStorage.getItem(getAttemptStorageKey(moduleId));
+    if (!raw) {
+        return { count: 0, lastAttempt: 0 };
+    }
+    try {
+        const parsed = JSON.parse(raw);
+        return {
+            count: Number(parsed.count) || 0,
+            lastAttempt: Number(parsed.lastAttempt) || 0
+        };
+    } catch (error) {
+        return { count: 0, lastAttempt: 0 };
+    }
+}
+
+function saveAttemptData(moduleId, data) {
+    localStorage.setItem(getAttemptStorageKey(moduleId), JSON.stringify(data));
+}
+
+function formatCooldownTime(ms) {
+    if (ms <= 0) {
+        return '';
+    }
+    const minutes = Math.ceil(ms / 60000);
+    if (minutes <= 1) {
+        const seconds = Math.max(1, Math.ceil(ms / 1000));
+        return `${seconds} שניות`;
+    }
+    return `${minutes} דקות`;
+}
+
+function getTimeRemaining(data) {
+    if (data.count < MAX_ATTEMPTS) {
+        return 0;
+    }
+    return Math.max(0, COOLDOWN_MS - (Date.now() - data.lastAttempt));
+}
+
+function updateQuizUI(moduleId) {
+    const data = loadAttemptData(moduleId);
+    const timeRemaining = getTimeRemaining(data);
+    const quizForm = document.getElementById(`quiz-${moduleId}`);
+    if (!quizForm) {
+        return;
+    }
+    const button = quizForm.querySelector('button');
+    const counter = document.getElementById(`attempt-counter-${moduleId}`);
+    const resultDiv = document.getElementById(`result-${moduleId}`);
+    if (timeRemaining <= 0 && data.count >= MAX_ATTEMPTS) {
+        data.count = 0;
+        data.lastAttempt = 0;
+        saveAttemptData(moduleId, data);
+    }
+    const remainingAttempts = Math.max(0, MAX_ATTEMPTS - data.count);
+    if (button) {
+        button.disabled = timeRemaining > 0;
+    }
+    if (counter) {
+        counter.textContent = `ניסיונות שנותרו: ${remainingAttempts}`;
+    }
+    if (resultDiv && timeRemaining > 0) {
+        resultDiv.textContent = `הגעת למספר הניסיונות המקסימלי. ניתן לנסות שוב בעוד ${formatCooldownTime(timeRemaining)}.`;
+    }
+}
+
+function canAttemptQuiz(moduleId) {
+    const data = loadAttemptData(moduleId);
+    const timeRemaining = getTimeRemaining(data);
+    if (timeRemaining > 0) {
+        return { allowed: false, data, timeRemaining };
+    }
+    if (data.count >= MAX_ATTEMPTS) {
+        data.count = 0;
+        data.lastAttempt = 0;
+        saveAttemptData(moduleId, data);
+    }
+    return { allowed: true, data, timeRemaining: 0 };
+}
+
 // פונקציה לבדיקה ולהצגת תוצאות הקוויז
 function checkQuiz(moduleId) {
     const quizForm = document.getElementById('quiz-' + moduleId);
+    const resultDiv = document.getElementById('result-' + moduleId);
+    if (!quizForm || !resultDiv) {
+        return;
+    }
+    const attemptStatus = canAttemptQuiz(moduleId);
+    if (!attemptStatus.allowed) {
+        resultDiv.textContent = `הגעת למספר הניסיונות המקסימלי. ניתן לנסות שוב בעוד ${formatCooldownTime(attemptStatus.timeRemaining)}.`;
+        updateQuizUI(moduleId);
+        return;
+    }
     const answers = quizAnswers[moduleId];
     let score = 0;
     let total = 0;
@@ -83,6 +180,23 @@ function checkQuiz(moduleId) {
             }
         }
     }
-    const resultDiv = document.getElementById('result-' + moduleId);
-    resultDiv.textContent = `תוצאה: ${score} מתוך ${total}`;
+    const data = attemptStatus.data;
+    data.count += 1;
+    data.lastAttempt = Date.now();
+    saveAttemptData(moduleId, data);
+    const remainingAttempts = Math.max(0, MAX_ATTEMPTS - data.count);
+    if (remainingAttempts === 0) {
+        resultDiv.textContent = `תוצאה: ${score} מתוך ${total}. הגעת למספר הניסיונות המקסימלי. ניתן לנסות שוב בעוד ${formatCooldownTime(COOLDOWN_MS)}.`;
+    } else {
+        resultDiv.textContent = `תוצאה: ${score} מתוך ${total}`;
+    }
+    updateQuizUI(moduleId);
 }
+
+document.addEventListener('DOMContentLoaded', () => {
+    const quizForms = document.querySelectorAll('form.quiz[id^="quiz-"]');
+    quizForms.forEach((form) => {
+        const moduleId = form.id.replace('quiz-', '');
+        updateQuizUI(moduleId);
+    });
+});
