@@ -82,6 +82,23 @@ nav a:hover{
   box-shadow: 0 6px 14px rgba(26, 43, 82, .12);
 }
 
+nav a.is-active{
+  color: #ffffff;
+  background: linear-gradient(120deg, var(--a), var(--e));
+  border-color: rgba(79,106,217,.4);
+  box-shadow: 0 10px 20px rgba(79,106,217,.2);
+}
+
+nav a.is-completed{
+  background: rgba(154,210,109,.3);
+  border-color: rgba(154,210,109,.55);
+}
+
+nav a.is-active.is-completed{
+  background: linear-gradient(120deg, var(--d), var(--b));
+  border-color: rgba(79,195,217,.5);
+}
+
 .container{
   max-width: 980px;
   margin: 20px auto;
