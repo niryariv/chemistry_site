@@ -89,11 +89,13 @@ function checkQuiz(moduleId) {
     const reflectionArea = quizForm.querySelector('.reflection-area');
     const reflectionInput = quizForm.querySelector('.reflection-input');
     const submitButton = quizForm.querySelector('button');
+    const reflectionStatusKey = `reflection-needed-${moduleId}`;
     if (score < total) {
         if (reflectionArea) {
             reflectionArea.hidden = false;
         }
         quizForm.dataset.needsReflection = 'true';
+        localStorage.setItem(reflectionStatusKey, 'true');
         const hasText = reflectionInput && reflectionInput.value.trim().length > 0;
         if (submitButton) {
             submitButton.disabled = !hasText;
@@ -103,6 +105,7 @@ function checkQuiz(moduleId) {
             reflectionArea.hidden = true;
         }
         quizForm.dataset.needsReflection = 'false';
+        localStorage.setItem(reflectionStatusKey, 'false');
         if (submitButton) {
             submitButton.disabled = false;
         }
@@ -120,6 +123,19 @@ document.addEventListener('DOMContentLoaded', () => {
         const storedValue = localStorage.getItem(storageKey);
         if (storedValue) {
             input.value = storedValue;
+        }
+        const form = input.closest('form');
+        if (form) {
+            const reflectionArea = form.querySelector('.reflection-area');
+            const needsReflection = localStorage.getItem(`reflection-needed-${moduleId}`) === 'true';
+            form.dataset.needsReflection = needsReflection ? 'true' : 'false';
+            if (reflectionArea && needsReflection) {
+                reflectionArea.hidden = false;
+            }
+            const button = form.querySelector('button');
+            if (button && needsReflection) {
+                button.disabled = input.value.trim().length === 0;
+            }
         }
         input.addEventListener('input', () => {
             const trimmedValue = input.value.trim();
