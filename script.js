@@ -69,6 +69,61 @@ const quizAnswers = {
 
 const MAX_ATTEMPTS = 3;
 const COOLDOWN_MS = 5 * 60 * 1000;
+const COMPLETED_MODULES_COOKIE = 'completedModules';
+
+function getCookieValue(name) {
+    if (!document.cookie) {
+        return '';
+    }
+    const cookies = document.cookie.split('; ').map((cookie) => cookie.split('='));
+    for (const [key, value] of cookies) {
+        if (key === name) {
+            return decodeURIComponent(value || '');
+        }
+    }
+    return '';
+}
+
+function setCookieValue(name, value, days) {
+    const expires = new Date();
+    expires.setDate(expires.getDate() + days);
+    document.cookie = `${name}=${encodeURIComponent(value)}; expires=${expires.toUTCString()}; path=/; SameSite=Lax`;
+}
+
+function getCompletedModules() {
+    const raw = getCookieValue(COMPLETED_MODULES_COOKIE);
+    if (!raw) {
+        return new Set();
+    }
+    return new Set(raw.split(',').map((item) => item.trim()).filter(Boolean));
+}
+
+function saveCompletedModules(completedModules) {
+    setCookieValue(COMPLETED_MODULES_COOKIE, Array.from(completedModules).join(','), 365);
+}
+
+function getCurrentModuleId() {
+    const match = window.location.pathname.match(/(module\\d+)\\.html$/);
+    return match ? match[1] : '';
+}
+
+function updateNavHighlights(currentModuleId) {
+    const completedModules = getCompletedModules();
+    document.querySelectorAll('nav a[data-module]').forEach((link) => {
+        const moduleId = link.dataset.module;
+        link.classList.toggle('is-active', Boolean(currentModuleId) && moduleId === currentModuleId);
+        link.classList.toggle('is-completed', completedModules.has(moduleId));
+    });
+}
+
+function markModuleCompleted(moduleId) {
+    const completedModules = getCompletedModules();
+    if (!completedModules.has(moduleId)) {
+        completedModules.add(moduleId);
+        saveCompletedModules(completedModules);
+    }
+    updateNavHighlights(getCurrentModuleId());
+}
 
 function getAttemptStorageKey(moduleId) {
     return `quizAttempts:${moduleId}`;
@@ -190,10 +245,12 @@ function checkQuiz(moduleId) {
     } else {
         resultDiv.textContent = `תוצאה: ${score} מתוך ${total}. ניסיונות שנותרו: ${remainingAttempts}.`;
     }
+    markModuleCompleted(moduleId);
     updateQuizUI(moduleId);
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+    updateNavHighlights(getCurrentModuleId());
     const quizForms = document.querySelectorAll('form.quiz[id^="quiz-"]');
     quizForms.forEach((form) => {
         const moduleId = form.id.replace('quiz-', '');
