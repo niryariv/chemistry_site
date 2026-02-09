@@ -249,6 +249,277 @@ function checkQuiz(moduleId) {
     updateQuizUI(moduleId);
 }
 
+const elementData = [
+    { number: 1, symbol: 'H', name: 'מימן' },
+    { number: 2, symbol: 'He', name: 'הליום' },
+    { number: 3, symbol: 'Li', name: 'ליתיום' },
+    { number: 4, symbol: 'Be', name: 'בריליום' },
+    { number: 5, symbol: 'B', name: 'בורון' },
+    { number: 6, symbol: 'C', name: 'פחמן' },
+    { number: 7, symbol: 'N', name: 'חנקן' },
+    { number: 8, symbol: 'O', name: 'חמצן' },
+    { number: 9, symbol: 'F', name: 'פלואור' },
+    { number: 10, symbol: 'Ne', name: 'ניאון' },
+    { number: 11, symbol: 'Na', name: 'נתרן' },
+    { number: 12, symbol: 'Mg', name: 'מגנזיום' },
+    { number: 13, symbol: 'Al', name: 'אלומיניום' },
+    { number: 14, symbol: 'Si', name: 'צורן' },
+    { number: 15, symbol: 'P', name: 'זרחן' },
+    { number: 16, symbol: 'S', name: 'גופרית' },
+    { number: 17, symbol: 'Cl', name: 'כלור' },
+    { number: 18, symbol: 'Ar', name: 'ארגון' },
+    { number: 19, symbol: 'K', name: 'אשלגן' },
+    { number: 20, symbol: 'Ca', name: 'סידן' },
+    { number: 21, symbol: 'Sc', name: 'סקנדיום' },
+    { number: 22, symbol: 'Ti', name: 'טיטניום' },
+    { number: 23, symbol: 'V', name: 'ונדיום' },
+    { number: 24, symbol: 'Cr', name: 'כרום' },
+    { number: 25, symbol: 'Mn', name: 'מנגן' },
+    { number: 26, symbol: 'Fe', name: 'ברזל' },
+    { number: 27, symbol: 'Co', name: 'קובלט' },
+    { number: 28, symbol: 'Ni', name: 'ניקל' },
+    { number: 29, symbol: 'Cu', name: 'נחושת' },
+    { number: 30, symbol: 'Zn', name: 'אבץ' },
+    { number: 31, symbol: 'Ga', name: 'גליום' },
+    { number: 32, symbol: 'Ge', name: 'גרמניום' },
+    { number: 33, symbol: 'As', name: 'ארסן' },
+    { number: 34, symbol: 'Se', name: 'סלניום' },
+    { number: 35, symbol: 'Br', name: 'ברום' },
+    { number: 36, symbol: 'Kr', name: 'קריפטון' },
+    { number: 37, symbol: 'Rb', name: 'רובידיום' },
+    { number: 38, symbol: 'Sr', name: 'סטרונציום' },
+    { number: 39, symbol: 'Y', name: 'איטריום' },
+    { number: 40, symbol: 'Zr', name: 'זרקוניום' },
+    { number: 41, symbol: 'Nb', name: 'ניוביום' },
+    { number: 42, symbol: 'Mo', name: 'מוליבדן' },
+    { number: 43, symbol: 'Tc', name: 'טכנציום' },
+    { number: 44, symbol: 'Ru', name: 'רותניום' },
+    { number: 45, symbol: 'Rh', name: 'רודיום' },
+    { number: 46, symbol: 'Pd', name: 'פלדיום' },
+    { number: 47, symbol: 'Ag', name: 'כסף' },
+    { number: 48, symbol: 'Cd', name: 'קדמיום' },
+    { number: 49, symbol: 'In', name: 'אינדיום' },
+    { number: 50, symbol: 'Sn', name: 'בדיל' },
+    { number: 51, symbol: 'Sb', name: 'אנטימון' },
+    { number: 52, symbol: 'Te', name: 'טלור' },
+    { number: 53, symbol: 'I', name: 'יוד' },
+    { number: 54, symbol: 'Xe', name: 'קסנון' },
+    { number: 55, symbol: 'Cs', name: 'צזיום' },
+    { number: 56, symbol: 'Ba', name: 'בריום' },
+    { number: 57, symbol: 'La', name: 'לנתן' },
+    { number: 58, symbol: 'Ce', name: 'צריום' },
+    { number: 59, symbol: 'Pr', name: 'פרסאודימיום' },
+    { number: 60, symbol: 'Nd', name: 'נאודימיום' },
+    { number: 61, symbol: 'Pm', name: 'פרומתיום' },
+    { number: 62, symbol: 'Sm', name: 'סמריום' },
+    { number: 63, symbol: 'Eu', name: 'אירופיום' },
+    { number: 64, symbol: 'Gd', name: 'גדוליניום' },
+    { number: 65, symbol: 'Tb', name: 'טרביום' },
+    { number: 66, symbol: 'Dy', name: 'דיספרוזיום' },
+    { number: 67, symbol: 'Ho', name: 'הולמיום' },
+    { number: 68, symbol: 'Er', name: 'ארביום' },
+    { number: 69, symbol: 'Tm', name: 'תוליום' },
+    { number: 70, symbol: 'Yb', name: 'איטרביום' },
+    { number: 71, symbol: 'Lu', name: 'לוטציום' },
+    { number: 72, symbol: 'Hf', name: 'הפניום' },
+    { number: 73, symbol: 'Ta', name: 'טנטלום' },
+    { number: 74, symbol: 'W', name: 'טונגסטן' },
+    { number: 75, symbol: 'Re', name: 'רניום' },
+    { number: 76, symbol: 'Os', name: 'אוסמיום' },
+    { number: 77, symbol: 'Ir', name: 'אירידיום' },
+    { number: 78, symbol: 'Pt', name: 'פלטינה' },
+    { number: 79, symbol: 'Au', name: 'זהב' },
+    { number: 80, symbol: 'Hg', name: 'כספית' },
+    { number: 81, symbol: 'Tl', name: 'תליום' },
+    { number: 82, symbol: 'Pb', name: 'עופרת' },
+    { number: 83, symbol: 'Bi', name: 'ביסמוט' },
+    { number: 84, symbol: 'Po', name: 'פולוניום' },
+    { number: 85, symbol: 'At', name: 'אסטטין' },
+    { number: 86, symbol: 'Rn', name: 'רדון' },
+    { number: 87, symbol: 'Fr', name: 'פרנסיום' },
+    { number: 88, symbol: 'Ra', name: 'רדיום' },
+    { number: 89, symbol: 'Ac', name: 'אקטיניום' },
+    { number: 90, symbol: 'Th', name: 'תוריום' },
+    { number: 91, symbol: 'Pa', name: 'פרוטאקטיניום' },
+    { number: 92, symbol: 'U', name: 'אורניום' },
+    { number: 93, symbol: 'Np', name: 'נפטוניום' },
+    { number: 94, symbol: 'Pu', name: 'פלוטוניום' },
+    { number: 95, symbol: 'Am', name: 'אמריציום' },
+    { number: 96, symbol: 'Cm', name: 'קיריום' },
+    { number: 97, symbol: 'Bk', name: 'ברקליום' },
+    { number: 98, symbol: 'Cf', name: 'קליפורניום' },
+    { number: 99, symbol: 'Es', name: 'איינשטייניום' },
+    { number: 100, symbol: 'Fm', name: 'פרמיום' },
+    { number: 101, symbol: 'Md', name: 'מנדלביום' },
+    { number: 102, symbol: 'No', name: 'נובליום' },
+    { number: 103, symbol: 'Lr', name: 'לורנציום' },
+    { number: 104, symbol: 'Rf', name: 'רתרפורדיום' },
+    { number: 105, symbol: 'Db', name: 'דובניום' },
+    { number: 106, symbol: 'Sg', name: 'סיבורגיום' },
+    { number: 107, symbol: 'Bh', name: 'בוהריום' },
+    { number: 108, symbol: 'Hs', name: 'האסים' },
+    { number: 109, symbol: 'Mt', name: 'מייטנריום' },
+    { number: 110, symbol: 'Ds', name: 'דרמשטטיום' },
+    { number: 111, symbol: 'Rg', name: 'רנטגניום' },
+    { number: 112, symbol: 'Cn', name: 'קופרניקיום' },
+    { number: 113, symbol: 'Nh', name: 'ניהוניום' },
+    { number: 114, symbol: 'Fl', name: 'פלרוביום' },
+    { number: 115, symbol: 'Mc', name: 'מוסקוביום' },
+    { number: 116, symbol: 'Lv', name: 'ליברמוריום' },
+    { number: 117, symbol: 'Ts', name: 'טנסין' },
+    { number: 118, symbol: 'Og', name: 'אוגניסיון' }
+];
+
+const categoryMap = {
+    alkali: new Set(['Li', 'Na', 'K', 'Rb', 'Cs', 'Fr']),
+    alkaline: new Set(['Be', 'Mg', 'Ca', 'Sr', 'Ba', 'Ra']),
+    transition: new Set([
+        'Sc', 'Ti', 'V', 'Cr', 'Mn', 'Fe', 'Co', 'Ni', 'Cu', 'Zn',
+        'Y', 'Zr', 'Nb', 'Mo', 'Tc', 'Ru', 'Rh', 'Pd', 'Ag', 'Cd',
+        'Hf', 'Ta', 'W', 'Re', 'Os', 'Ir', 'Pt', 'Au', 'Hg',
+        'Rf', 'Db', 'Sg', 'Bh', 'Hs', 'Mt', 'Ds', 'Rg', 'Cn'
+    ]),
+    postTransition: new Set(['Al', 'Ga', 'In', 'Sn', 'Tl', 'Pb', 'Bi', 'Nh', 'Fl', 'Mc', 'Lv']),
+    metalloid: new Set(['B', 'Si', 'Ge', 'As', 'Sb', 'Te', 'Po']),
+    nonmetal: new Set(['H', 'C', 'N', 'O', 'P', 'S', 'Se']),
+    halogen: new Set(['F', 'Cl', 'Br', 'I', 'At', 'Ts']),
+    noble: new Set(['He', 'Ne', 'Ar', 'Kr', 'Xe', 'Rn', 'Og']),
+    lanthanide: new Set(['La', 'Ce', 'Pr', 'Nd', 'Pm', 'Sm', 'Eu', 'Gd', 'Tb', 'Dy', 'Ho', 'Er', 'Tm', 'Yb', 'Lu']),
+    actinide: new Set(['Ac', 'Th', 'Pa', 'U', 'Np', 'Pu', 'Am', 'Cm', 'Bk', 'Cf', 'Es', 'Fm', 'Md', 'No', 'Lr'])
+};
+
+const periodicTableLayout = [
+    { label: '1', items: ['H', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'He'] },
+    { label: '2', items: ['Li', 'Be', '', '', '', '', '', '', '', '', '', '', 'B', 'C', 'N', 'O', 'F', 'Ne'] },
+    { label: '3', items: ['Na', 'Mg', '', '', '', '', '', '', '', '', '', '', 'Al', 'Si', 'P', 'S', 'Cl', 'Ar'] },
+    { label: '4', items: ['K', 'Ca', 'Sc', 'Ti', 'V', 'Cr', 'Mn', 'Fe', 'Co', 'Ni', 'Cu', 'Zn', 'Ga', 'Ge', 'As', 'Se', 'Br', 'Kr'] },
+    { label: '5', items: ['Rb', 'Sr', 'Y', 'Zr', 'Nb', 'Mo', 'Tc', 'Ru', 'Rh', 'Pd', 'Ag', 'Cd', 'In', 'Sn', 'Sb', 'Te', 'I', 'Xe'] },
+    {
+        label: '6',
+        items: [
+            'Cs', 'Ba',
+            { type: 'placeholder', label: '57–71', category: 'lanthanide' },
+            'Hf', 'Ta', 'W', 'Re', 'Os', 'Ir', 'Pt', 'Au', 'Hg', 'Tl', 'Pb', 'Bi', 'Po', 'At', 'Rn'
+        ]
+    },
+    {
+        label: '7',
+        items: [
+            'Fr', 'Ra',
+            { type: 'placeholder', label: '89–103', category: 'actinide' },
+            'Rf', 'Db', 'Sg', 'Bh', 'Hs', 'Mt', 'Ds', 'Rg', 'Cn', 'Nh', 'Fl', 'Mc', 'Lv', 'Ts', 'Og'
+        ]
+    }
+];
+
+const lanthanideRow = {
+    label: 'לנתנידים',
+    items: ['', '', 'La', 'Ce', 'Pr', 'Nd', 'Pm', 'Sm', 'Eu', 'Gd', 'Tb', 'Dy', 'Ho', 'Er', 'Tm', 'Yb', 'Lu', '']
+};
+
+const actinideRow = {
+    label: 'אקטינידים',
+    items: ['', '', 'Ac', 'Th', 'Pa', 'U', 'Np', 'Pu', 'Am', 'Cm', 'Bk', 'Cf', 'Es', 'Fm', 'Md', 'No', 'Lr', '']
+};
+
+function getCategory(symbol) {
+    for (const [category, symbols] of Object.entries(categoryMap)) {
+        if (symbols.has(symbol)) {
+            return category;
+        }
+    }
+    return 'transition';
+}
+
+function renderPeriodicTable() {
+    const grid = document.getElementById('periodic-table-grid');
+    if (!grid) {
+        return;
+    }
+    grid.innerHTML = '';
+
+    const elementMap = new Map(elementData.map((element) => [element.symbol, element]));
+    const groups = Array.from({ length: 18 }, (_, index) => index + 1);
+
+    const cornerLabel = document.createElement('div');
+    cornerLabel.className = 'periodic-label';
+    cornerLabel.textContent = 'קבוצה';
+    cornerLabel.style.gridRow = '1';
+    cornerLabel.style.gridColumn = '1';
+    grid.appendChild(cornerLabel);
+
+    groups.forEach((group, index) => {
+        const label = document.createElement('div');
+        label.className = 'periodic-label';
+        label.textContent = group;
+        label.style.gridRow = '1';
+        label.style.gridColumn = String(index + 2);
+        grid.appendChild(label);
+    });
+
+    const buildRow = (rowData, rowIndex) => {
+        const rowLabel = document.createElement('div');
+        rowLabel.className = 'periodic-label';
+        rowLabel.textContent = rowData.label;
+        rowLabel.style.gridRow = String(rowIndex);
+        rowLabel.style.gridColumn = '1';
+        grid.appendChild(rowLabel);
+
+        rowData.items.forEach((item, colIndex) => {
+            const cell = document.createElement('div');
+            cell.style.gridRow = String(rowIndex);
+            cell.style.gridColumn = String(colIndex + 2);
+
+            if (!item) {
+                cell.className = 'element-cell empty';
+                grid.appendChild(cell);
+                return;
+            }
+
+            if (typeof item === 'object') {
+                cell.className = `element-cell placeholder category-${item.category || 'transition'}`;
+                cell.textContent = item.label;
+                grid.appendChild(cell);
+                return;
+            }
+
+            const element = elementMap.get(item);
+            if (!element) {
+                cell.className = 'element-cell empty';
+                grid.appendChild(cell);
+                return;
+            }
+
+            const category = getCategory(element.symbol);
+            cell.className = `element-cell category-${category}`;
+            cell.setAttribute('role', 'gridcell');
+            cell.setAttribute(
+                'aria-label',
+                `${element.name} (${element.symbol}), מספר אטומי ${element.number}, קבוצה ${colIndex + 1}, תקופה ${rowData.label}`
+            );
+
+            const number = document.createElement('span');
+            number.className = 'element-number';
+            number.textContent = element.number;
+
+            const symbol = document.createElement('span');
+            symbol.className = 'element-symbol';
+            symbol.textContent = element.symbol;
+
+            const name = document.createElement('span');
+            name.className = 'element-name';
+            name.textContent = element.name;
+
+            cell.append(number, symbol, name);
+            grid.appendChild(cell);
+        });
+    };
+
+    periodicTableLayout.forEach((row, index) => buildRow(row, index + 2));
+    buildRow(lanthanideRow, periodicTableLayout.length + 2);
+    buildRow(actinideRow, periodicTableLayout.length + 3);
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     updateNavHighlights(getCurrentModuleId());
     const quizForms = document.querySelectorAll('form.quiz[id^="quiz-"]');
@@ -256,4 +527,5 @@ document.addEventListener('DOMContentLoaded', () => {
         const moduleId = form.id.replace('quiz-', '');
         updateQuizUI(moduleId);
     });
+    renderPeriodicTable();
 });
