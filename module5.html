@@ -84,22 +84,25 @@
         <p>כשמתרגלים קריאה של תא, אפשר מיד להבין גם את מיקום היסוד (תקופה/קבוצה), וגם להסיק על
             תכונות כלליות כמו מספר אלקטרוני הערכיות, דפוסי תגובתיות וסוגי הקשרים שהוא נוטה ליצור.</p>
         <h2>הטבלה המחזורית המלאה</h2>
-        <p>בטבלה הבאה מופיעה הטבלה המחזורית עם כל היסודות הידועים, מסודרים לפי תקופות וקבוצות.</p>
+        <p>בטבלה הבאה מופיעה הטבלה המחזורית עם כל היסודות הידועים, מסודרים לפי תקופות וקבוצות.
+            הצבעים מסמנים את הקבוצות (עמודות), כך שכל יסוד בעמודה זהה מקבל את אותו צבע.</p>
+        <div class="callout">
+            <strong>דגשים חשובים לייצוג מודרני של הטבלה:</strong>
+            <ul>
+                <li>הטבלה מסודרת לפי עלייה במספר האטומי (מספר הפרוטונים).</li>
+                <li>קבוצות (עמודות) מייצגות משפחות כימיות דומות, ולכן צבע אחיד לכל עמודה.</li>
+                <li>תקופות (שורות) מייצגות מספר קליפות אלקטרונים.</li>
+                <li>הבלוקים <strong>s</strong>, <strong>p</strong>, <strong>d</strong> ו-<strong>f</strong> מתארים את קליפת האלקטרונים שנמצאת בתהליך מילוי.</li>
+            </ul>
+        </div>
         <div class="periodic-table-wrapper">
-            <div class="periodic-table-legend" aria-label="מקרא צבעים בטבלה המחזורית">
-                <div class="legend-item category-alkali">מתכות אלקליות</div>
-                <div class="legend-item category-alkaline">מתכות אלקליות עפרוריות</div>
-                <div class="legend-item category-transition">מתכות מעבר</div>
-                <div class="legend-item category-post-transition">מתכות לאחר מעבר</div>
-                <div class="legend-item category-metalloid">מטלואידים</div>
-                <div class="legend-item category-nonmetal">אל-מתכות</div>
-                <div class="legend-item category-halogen">הלוגנים</div>
-                <div class="legend-item category-noble">גזים אצילים</div>
-                <div class="legend-item category-lanthanide">לנתנידים</div>
-                <div class="legend-item category-actinide">אקטינידים</div>
-            </div>
+            <div class="periodic-table-legend group-legend" id="group-legend" aria-label="מקרא צבעים לפי קבוצות"></div>
             <div class="periodic-table-grid" id="periodic-table-grid" role="grid" aria-label="הטבלה המחזורית עם קבוצות ותקופות"></div>
         </div>
+        <p><strong>משפחות חשובות בטבלה:</strong> קבוצות 1–2 הן מתכות אלקליות ואלקליות עפרוריות,
+            קבוצות 3–12 הן מתכות מעבר, וקבוצות 13–18 כוללות את משפחות הבורון, הפחמן, החנקן,
+            החמצן, ההלוגנים והגזים האצילים. מימן נמצא בקבוצה 1 אך אינו מתכת אלקלית במלוא המובן,
+            ולכן מסומן באותה קבוצה אך נחשב יוצא דופן.</p>
         <h2>העמקה: מגמות בטבלה המחזורית</h2>
         <p>הטבלה המחזורית מאפשרת לחזות תכונות של יסודות לפי מיקומם. כאשר נעים משמאל לימין
             בתקופה, מספר הפרוטונים עולה והגרעין מושך חזק יותר את האלקטרונים, ולכן האטום לרוב קטן.

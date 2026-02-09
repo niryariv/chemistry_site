@@ -193,7 +193,7 @@ img{
 
 .periodic-table-legend{
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 8px;
   margin-bottom: 16px;
 }
@@ -206,6 +206,31 @@ img{
   text-align: center;
   border: 1px solid rgba(20,40,90,.12);
   color: #1b1f2e;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.group-legend{
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+}
+
+.legend-swatch{
+  width: 14px;
+  height: 14px;
+  border-radius: 4px;
+  border: 1px solid rgba(20,40,90,.2);
+  background: var(--group-color, #e9eef5);
+  box-shadow: inset 0 1px 2px rgba(255,255,255,.7);
+}
+
+.legend-group-number{
+  font-weight: 900;
+}
+
+.legend-group-name{
+  font-weight: 600;
 }
 
 .periodic-table-grid{
@@ -253,8 +278,8 @@ img{
   font-weight: 800;
   font-size: .8rem;
   color: var(--muted);
-  background: rgba(255,179,71,.18);
-  border-color: rgba(255,179,71,.35);
+  background: var(--group-color-light, rgba(255,179,71,.18));
+  border-color: rgba(20,40,90,.2);
 }
 
 .element-number{
@@ -274,40 +299,70 @@ img{
   color: #333b4f;
 }
 
-.category-alkali{ background: #ffd7a2; }
-.category-alkaline{ background: #ffeab8; }
-.category-transition{ background: #c9e4ff; }
-.category-post-transition{ background: #d7d9ff; }
-.category-metalloid{ background: #c8f2d0; }
-.category-nonmetal{ background: #f5d0ff; }
-.category-halogen{ background: #ffd1d9; }
-.category-noble{ background: #c7f0f3; }
-.category-lanthanide{ background: #ffe4c9; }
-.category-actinide{ background: #ffd0b5; }
-
-.element-cell.category-alkali,
-.element-cell.category-alkaline,
-.element-cell.category-transition,
-.element-cell.category-post-transition,
-.element-cell.category-metalloid,
-.element-cell.category-nonmetal,
-.element-cell.category-halogen,
-.element-cell.category-noble,
-.element-cell.category-lanthanide,
-.element-cell.category-actinide{
+.element-cell[class*="group-"]{
   border-color: rgba(20,40,90,.12);
 }
 
-.element-cell.category-alkali{ background: linear-gradient(160deg, #ffd7a2, #ffe9c9); }
-.element-cell.category-alkaline{ background: linear-gradient(160deg, #ffeab8, #fff4d9); }
-.element-cell.category-transition{ background: linear-gradient(160deg, #c9e4ff, #e7f2ff); }
-.element-cell.category-post-transition{ background: linear-gradient(160deg, #d7d9ff, #eff0ff); }
-.element-cell.category-metalloid{ background: linear-gradient(160deg, #c8f2d0, #e7f8ed); }
-.element-cell.category-nonmetal{ background: linear-gradient(160deg, #f5d0ff, #fbe7ff); }
-.element-cell.category-halogen{ background: linear-gradient(160deg, #ffd1d9, #ffe7ec); }
-.element-cell.category-noble{ background: linear-gradient(160deg, #c7f0f3, #e2f7f9); }
-.element-cell.category-lanthanide{ background: linear-gradient(160deg, #ffe4c9, #fff1df); }
-.element-cell.category-actinide{ background: linear-gradient(160deg, #ffd0b5, #ffe3d5); }
+.group-1{ --group-color: #f6b0a1; --group-color-light: #fbe1db; }
+.group-2{ --group-color: #f8d59b; --group-color-light: #fceacd; }
+.group-3{ --group-color: #f7ef9c; --group-color-light: #fdf6cf; }
+.group-4{ --group-color: #d5f2a3; --group-color-light: #ecf9d4; }
+.group-5{ --group-color: #b5f2c2; --group-color-light: #daf7df; }
+.group-6{ --group-color: #a8f1dd; --group-color-light: #d5fbf1; }
+.group-7{ --group-color: #a7e7f6; --group-color-light: #d8f5fb; }
+.group-8{ --group-color: #9cccf9; --group-color-light: #d6ebfd; }
+.group-9{ --group-color: #9fb0f7; --group-color-light: #dbe2fd; }
+.group-10{ --group-color: #b7a1f3; --group-color-light: #e4dcfb; }
+.group-11{ --group-color: #d4a0f0; --group-color-light: #f0defa; }
+.group-12{ --group-color: #f0a3dc; --group-color-light: #f9def1; }
+.group-13{ --group-color: #f7a6b8; --group-color-light: #fbdce4; }
+.group-14{ --group-color: #f6b39b; --group-color-light: #fbe4d6; }
+.group-15{ --group-color: #f5c792; --group-color-light: #fce7d1; }
+.group-16{ --group-color: #f1dd9d; --group-color-light: #fbf0d4; }
+.group-17{ --group-color: #d7e8a3; --group-color-light: #edf6d2; }
+.group-18{ --group-color: #b7e6c2; --group-color-light: #dcf4e3; }
+
+.element-cell.group-1,
+.element-cell.group-2,
+.element-cell.group-3,
+.element-cell.group-4,
+.element-cell.group-5,
+.element-cell.group-6,
+.element-cell.group-7,
+.element-cell.group-8,
+.element-cell.group-9,
+.element-cell.group-10,
+.element-cell.group-11,
+.element-cell.group-12,
+.element-cell.group-13,
+.element-cell.group-14,
+.element-cell.group-15,
+.element-cell.group-16,
+.element-cell.group-17,
+.element-cell.group-18{
+  background: linear-gradient(160deg, var(--group-color), var(--group-color-light));
+}
+
+.legend-item.group-1,
+.legend-item.group-2,
+.legend-item.group-3,
+.legend-item.group-4,
+.legend-item.group-5,
+.legend-item.group-6,
+.legend-item.group-7,
+.legend-item.group-8,
+.legend-item.group-9,
+.legend-item.group-10,
+.legend-item.group-11,
+.legend-item.group-12,
+.legend-item.group-13,
+.legend-item.group-14,
+.legend-item.group-15,
+.legend-item.group-16,
+.legend-item.group-17,
+.legend-item.group-18{
+  background: var(--group-color-light);
+}
 
 @media (max-width: 900px){
   .periodic-table-grid{
