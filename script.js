@@ -370,23 +370,26 @@ const elementData = [
     { number: 118, symbol: 'Og', name: 'אוגניסיון' }
 ];
 
-const categoryMap = {
-    alkali: new Set(['Li', 'Na', 'K', 'Rb', 'Cs', 'Fr']),
-    alkaline: new Set(['Be', 'Mg', 'Ca', 'Sr', 'Ba', 'Ra']),
-    transition: new Set([
-        'Sc', 'Ti', 'V', 'Cr', 'Mn', 'Fe', 'Co', 'Ni', 'Cu', 'Zn',
-        'Y', 'Zr', 'Nb', 'Mo', 'Tc', 'Ru', 'Rh', 'Pd', 'Ag', 'Cd',
-        'Hf', 'Ta', 'W', 'Re', 'Os', 'Ir', 'Pt', 'Au', 'Hg',
-        'Rf', 'Db', 'Sg', 'Bh', 'Hs', 'Mt', 'Ds', 'Rg', 'Cn'
-    ]),
-    postTransition: new Set(['Al', 'Ga', 'In', 'Sn', 'Tl', 'Pb', 'Bi', 'Nh', 'Fl', 'Mc', 'Lv']),
-    metalloid: new Set(['B', 'Si', 'Ge', 'As', 'Sb', 'Te', 'Po']),
-    nonmetal: new Set(['H', 'C', 'N', 'O', 'P', 'S', 'Se']),
-    halogen: new Set(['F', 'Cl', 'Br', 'I', 'At', 'Ts']),
-    noble: new Set(['He', 'Ne', 'Ar', 'Kr', 'Xe', 'Rn', 'Og']),
-    lanthanide: new Set(['La', 'Ce', 'Pr', 'Nd', 'Pm', 'Sm', 'Eu', 'Gd', 'Tb', 'Dy', 'Ho', 'Er', 'Tm', 'Yb', 'Lu']),
-    actinide: new Set(['Ac', 'Th', 'Pa', 'U', 'Np', 'Pu', 'Am', 'Cm', 'Bk', 'Cf', 'Es', 'Fm', 'Md', 'No', 'Lr'])
-};
+const groupDefinitions = [
+    { group: 1, name: 'מתכות אלקליות (מימן יוצא דופן)' },
+    { group: 2, name: 'מתכות אלקליות עפרוריות' },
+    { group: 3, name: 'מתכות מעבר' },
+    { group: 4, name: 'מתכות מעבר' },
+    { group: 5, name: 'מתכות מעבר' },
+    { group: 6, name: 'מתכות מעבר' },
+    { group: 7, name: 'מתכות מעבר' },
+    { group: 8, name: 'מתכות מעבר' },
+    { group: 9, name: 'מתכות מעבר' },
+    { group: 10, name: 'מתכות מעבר' },
+    { group: 11, name: 'מתכות מעבר' },
+    { group: 12, name: 'מתכות מעבר' },
+    { group: 13, name: 'קבוצת הבורון' },
+    { group: 14, name: 'קבוצת הפחמן' },
+    { group: 15, name: 'קבוצת החנקן (פניקטוגנים)' },
+    { group: 16, name: 'קבוצת החמצן (כלקוגנים)' },
+    { group: 17, name: 'הלוגנים' },
+    { group: 18, name: 'גזים אצילים' }
+];
 
 const periodicTableLayout = [
     { label: '1', items: ['H', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'He'] },
@@ -422,13 +425,27 @@ const actinideRow = {
     items: ['', '', 'Ac', 'Th', 'Pa', 'U', 'Np', 'Pu', 'Am', 'Cm', 'Bk', 'Cf', 'Es', 'Fm', 'Md', 'No', 'Lr', '']
 };
 
-function getCategory(symbol) {
-    for (const [category, symbols] of Object.entries(categoryMap)) {
-        if (symbols.has(symbol)) {
-            return category;
-        }
+function getGroupDefinition(groupNumber) {
+    return groupDefinitions.find((group) => group.group === groupNumber);
+}
+
+function renderGroupLegend() {
+    const legend = document.getElementById('group-legend');
+    if (!legend) {
+        return;
     }
-    return 'transition';
+    legend.innerHTML = '';
+
+    groupDefinitions.forEach((group) => {
+        const item = document.createElement('div');
+        item.className = `legend-item group-${group.group}`;
+        item.innerHTML = `
+            <span class="legend-swatch" aria-hidden="true"></span>
+            <span class="legend-group-number">${group.group}</span>
+            <span class="legend-group-name">${group.name}</span>
+        `;
+        legend.appendChild(item);
+    });
 }
 
 function renderPeriodicTable() {
@@ -443,7 +460,7 @@ function renderPeriodicTable() {
 
     const cornerLabel = document.createElement('div');
     cornerLabel.className = 'periodic-label';
-    cornerLabel.textContent = 'קבוצה';
+    cornerLabel.textContent = 'קבוצה / תקופה';
     cornerLabel.style.gridRow = '1';
     cornerLabel.style.gridColumn = '1';
     grid.appendChild(cornerLabel);
@@ -477,7 +494,7 @@ function renderPeriodicTable() {
             }
 
             if (typeof item === 'object') {
-                cell.className = `element-cell placeholder category-${item.category || 'transition'}`;
+                cell.className = 'element-cell placeholder group-3';
                 cell.textContent = item.label;
                 grid.appendChild(cell);
                 return;
@@ -490,12 +507,14 @@ function renderPeriodicTable() {
                 return;
             }
 
-            const category = getCategory(element.symbol);
-            cell.className = `element-cell category-${category}`;
+            const groupNumber = colIndex + 1;
+            const groupDefinition = getGroupDefinition(groupNumber);
+            cell.className = `element-cell group-${groupNumber}`;
+            cell.dataset.group = String(groupNumber);
             cell.setAttribute('role', 'gridcell');
             cell.setAttribute(
                 'aria-label',
-                `${element.name} (${element.symbol}), מספר אטומי ${element.number}, קבוצה ${colIndex + 1}, תקופה ${rowData.label}`
+                `${element.name} (${element.symbol}), מספר אטומי ${element.number}, קבוצה ${groupNumber}${groupDefinition ? ` (${groupDefinition.name})` : ''}, תקופה ${rowData.label}`
             );
 
             const number = document.createElement('span');
@@ -527,5 +546,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const moduleId = form.id.replace('quiz-', '');
         updateQuizUI(moduleId);
     });
+    renderGroupLegend();
     renderPeriodicTable();
 });
