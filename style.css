@@ -529,3 +529,26 @@ footer{
   .periodic-table{ grid-auto-rows: 64px; }
   .element .symbol{ font-size: 1rem; }
 }
+
+.open-lesson-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  margin: 16px auto 0;
+}
+
+.open-lesson-links a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 38px;
+  padding: 8px 12px;
+  border: 1px solid #d9dee8;
+  border-radius: 10px;
+  background: #fff;
+  color: #2266d2;
+  font-weight: 800;
+  text-decoration: none;
+}
+
